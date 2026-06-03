@@ -30,31 +30,30 @@ Everything generative runs inside Claude. The only shell work is `git`.
 ## State machine
 
 ```
-BACKLOG → REFINING → READY → EXECUTING → REVIEW → PR → MERGED → DEPLOYED → DONE
-                                                    ↘
-                                                  FAILED
+BACKLOG → REFINED → SPEC READY → CODING → LOCAL REVIEW → PR → DONE
+                                                               ↑
+                                               FAILURE ← (from anywhere)
 ```
 
-| State     | Owner                  |
-| --------- | ---------------------- |
-| BACKLOG   | —                      |
-| REFINING  | Human + Orchestrator   |
-| READY     | Human                  |
-| EXECUTING | Executor agent         |
-| REVIEW    | Human (local testing)  |
-| PR        | Human / async reviewer |
-| MERGED    | CI/CD                  |
-| DEPLOYED  | CI/CD                  |
-| DONE      | —                      |
-| FAILED    | Human                  |
+| State        | Owner                  |
+| ------------ | ---------------------- |
+| BACKLOG      | —                      |
+| REFINED      | Human + Orchestrator   |
+| SPEC READY   | Human                  |
+| CODING       | Executor agent         |
+| LOCAL REVIEW | Human (local testing)  |
+| PR           | Human / async reviewer |
+| DONE         | —                      |
+| FAILURE      | Human (any stage)      |
 
 ## Actions
 
 | Command   | What happens                                          |
 | --------- | ----------------------------------------------------- |
+| `setup`   | Configure Trello board from URL — run once on init    |
 | `add`     | Create a card with just a title in BACKLOG            |
 | `refine`  | Discuss and populate the first card (or a given ID)   |
-| `scope`   | Write the formal spec to `{code-repo}/.claude/specs/` |
+| `scope`   | Write the formal spec to `{code-repo}/specs/`         |
 | `execute` | Prepare executor handoff — branch, spec path, context |
 | `push`    | Commit, push, open PR                                 |
 | `success` | Move card to DONE                                     |
@@ -63,11 +62,13 @@ BACKLOG → REFINING → READY → EXECUTING → REVIEW → PR → MERGED → DE
 ## Setup
 
 1. Use this repo as a template on GitHub
-2. Edit `config.yaml` (rename from `config.template.yaml`):
-   - Project name
-   - Path to your code repo
-   - Trello board ID
-3. Open `{project}-orch/` in Claude Code — the agent knows what to do
+2. Run the init script from your repos folder:
+   ```bash
+   spec-minded-harness/scripts/init.sh my-project
+   ```
+3. Open `my-project/my-project-orch/` in Claude Code
+4. Run `setup https://trello.com/b/xxxxx/my-board` — the agent configures the board ID automatically
+5. Done — start with `add`
 
 ## Structure
 

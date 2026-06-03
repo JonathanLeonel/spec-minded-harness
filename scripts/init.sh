@@ -34,7 +34,9 @@ mkdir -p "$ORCH_DIR"
 mkdir -p "$CODE_DIR/specs"
 
 cp "$TEMPLATES_DIR/orch/CLAUDE.md" "$ORCH_DIR/CLAUDE.md"
+cp "$TEMPLATES_DIR/orch/.gitignore" "$ORCH_DIR/.gitignore"
 cp "$TEMPLATES_DIR/code/CLAUDE.md" "$CODE_DIR/CLAUDE.md"
+cp "$TEMPLATES_DIR/code/.gitignore" "$CODE_DIR/.gitignore"
 
 # config.yaml con el nombre del proyecto pre-cargado
 sed "s/my-project/$PROJECT_NAME/g" "$HARNESS_ROOT/config.template.yaml" > "$ORCH_DIR/config.yaml"
@@ -50,4 +52,4 @@ echo "  └── ${PROJECT_NAME}-code/"
 echo "      ├── CLAUDE.md"
 echo "      └── specs/"
 echo ""
-echo "Siguiente paso: editá ${PROJECT_NAME}/${PROJECT_NAME}-orch/config.yaml"
+echo "Siguiente paso: abrí ${PROJECT_NAME}/${PROJECT_NAME}-orch/ en Claude Code y corré: setup https://trello.com/b/xxxxx/board-name"

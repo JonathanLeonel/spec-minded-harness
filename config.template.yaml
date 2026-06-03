@@ -10,15 +10,13 @@ trello:
   # Column names — adjust if your board uses different names
   columns:
     backlog: Backlog
-    refining: Refining
-    ready: Ready
-    executing: Executing
-    review: Review
+    refining: Refined
+    ready: Spec Ready
+    executing: Coding
+    review: Local Review
     pr: PR
-    merged: Merged
-    deployed: Deployed
     done: Done
-    failed: Failed
+    failed: Failure
 
 model:
   orchestrator: claude-opus-4-7
