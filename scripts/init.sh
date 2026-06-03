@@ -31,7 +31,7 @@ fi
 # ─── scaffold ────────────────────────────────────────────────────────────────
 
 mkdir -p "$ORCH_DIR"
-mkdir -p "$CODE_DIR/specs"
+mkdir -p "$CODE_DIR/specs/done"
 
 cp "$TEMPLATES_DIR/orch/CLAUDE.md" "$ORCH_DIR/CLAUDE.md"
 cp "$TEMPLATES_DIR/orch/.gitignore" "$ORCH_DIR/.gitignore"

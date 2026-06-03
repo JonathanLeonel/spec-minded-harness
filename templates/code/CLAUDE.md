@@ -73,7 +73,10 @@ When the user approves local review:
    - Push the default branch first: `git push -u origin main` (or `master` if that's the default)
 3. Push the feature branch: `git push -u origin feat/{idShort-padded}-{slug}`
 4. Open a PR: `gh pr create --base main --fill`
-5. Move the card to PR using the Trello MCP.
+5. Move the spec file to `specs/done/`: `git mv specs/{idShort-padded}-{slug}.md specs/done/{idShort-padded}-{slug}.md`
+6. Commit: `git commit -m "chore: archive spec #{idShort}"`
+7. Push the archive commit: `git push`
+8. Move the card to PR using the Trello MCP.
 
 Do not include "Generated with Claude Code" or any AI attribution in the PR body.
 Always end the PR body with:
