@@ -78,6 +78,29 @@ spec-minded-harness/       ← this repo (public template)
 {project}-code/            ← your actual project (existing or new)
 ```
 
+## Ideas worth building
+
+**Provider-agnostic state management**  
+Abstract the Trello integration behind an interface so state management can be swapped for Jira, SQLite, JSON files, or any other backend without changing the workflow.
+
+**Eval suite**  
+Automated end-to-end tests that simulate the full workflow — happy path and failure path — using the Anthropic SDK. Validates that agent behavior matches the spec on every change to the templates.
+
+**Mutation testing**  
+Include mutation testing as part of the `execute` quality gates, so the harness validates test quality, not just coverage.
+
+**Git worktree isolation**  
+Run each task in an isolated git worktree, preventing side effects between concurrent executions and making rollbacks trivial.
+
+**Run persistence**  
+Log each run: prompts, outputs, diffs, decisions. For debugging, retrospective analysis, and future eval training.
+
+**Spec templates**  
+Predefined spec templates for common task types: bug fix, new feature, refactor, API endpoint. Reduces the time from `refine` to `spec`.
+
+**`npx create-spec-minded`**  
+Publish as an npm package so bootstrapping a new project is a single command without needing to clone the repo manually.
+
 ---
 
-Built around [Claude Code](https://claude.ai/code). Inspired by real-world spec-driven workflows.
+Inspired by real-world spec-driven workflows.
