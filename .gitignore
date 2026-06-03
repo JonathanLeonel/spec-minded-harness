@@ -4,3 +4,6 @@
 
 # real config (template is versioned, real config is not)
 config.yaml
+
+# editor
+.vscode/
