@@ -1,0 +1,30 @@
+project:
+  name: my-project
+
+paths:
+  # Path to the code repo, relative to this orch folder
+  code_repo: ../my-project-code
+
+trello:
+  board_id: YOUR_BOARD_ID_HERE
+  # Column names — adjust if your board uses different names
+  columns:
+    backlog: Backlog
+    refining: Refining
+    ready: Ready
+    executing: Executing
+    review: Review
+    pr: PR
+    merged: Merged
+    deployed: Deployed
+    done: Done
+    failed: Failed
+
+model:
+  orchestrator: claude-opus-4-7
+  executor: claude-sonnet-4-6
+
+quality_gates:
+  - npm run lint
+  - npm run typecheck
+  - npm test
