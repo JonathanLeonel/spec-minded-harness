@@ -4,7 +4,7 @@ A spec-driven development runtime for Claude Code.
 
 ## The problem
 
-Coding agents are powerful but operationally chaotic. They drift, over-engineer, and lose context between sessions. The usual fix — better prompts — only goes so far.
+Coding agents are powerful but operationally chaotic. They drift, over-engineer, and lose context between sessions. The usual fix: better prompts. Only goes so far.
 
 The real fix is structure.
 
@@ -37,24 +37,24 @@ BACKLOG → REFINED → SPEC READY → CODING → LOCAL REVIEW → PR → DONE
 
 | State        | Owner                  |
 | ------------ | ---------------------- |
-| BACKLOG      | —                      |
+| BACKLOG      | Human                  |
 | REFINED      | Human + Orchestrator   |
 | SPEC READY   | Human                  |
 | CODING       | Executor agent         |
 | LOCAL REVIEW | Human (local testing)  |
 | PR           | Human / async reviewer |
-| DONE         | —                      |
+| DONE         | Human                  |
 | FAILURE      | Human (any stage)      |
 
 ## Actions
 
 | Command   | What happens                                          |
 | --------- | ----------------------------------------------------- |
-| `setup`   | Configure Trello board from URL — run once on init    |
+| `setup`   | Configure Trello board from URL, run once on init     |
 | `add`     | Create a card with just a title in BACKLOG            |
 | `refine`  | Discuss and populate the first card (or a given ID)   |
 | `spec`    | Write the formal spec to `{code-repo}/specs/`         |
-| `execute` | Prepare executor handoff — branch, spec path, context |
+| `execute` | Prepare executor handoff: branch, spec path, context  |
 | `push`    | Commit, push, open PR                                 |
 | `success` | Move card to DONE                                     |
 | `failure` | Move card to FAILED, keep branch, log a learning card |
