@@ -53,7 +53,7 @@ BACKLOG → REFINED → SPEC READY → CODING → LOCAL REVIEW → PR → DONE
 | `setup`   | Configure Trello board from URL — run once on init    |
 | `add`     | Create a card with just a title in BACKLOG            |
 | `refine`  | Discuss and populate the first card (or a given ID)   |
-| `scope`   | Write the formal spec to `{code-repo}/specs/`         |
+| `spec`    | Write the formal spec to `{code-repo}/specs/`         |
 | `execute` | Prepare executor handoff — branch, spec path, context |
 | `push`    | Commit, push, open PR                                 |
 | `success` | Move card to DONE                                     |

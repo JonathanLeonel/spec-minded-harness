@@ -43,11 +43,15 @@ Wait for the user to approve the plan. Incorporate any feedback before proceedin
 
 **Step 5 — Create the branch and commit the spec.**
 
+Run these commands now before writing any code:
+
 ```
 git checkout -b feat/{idShort-padded}-{slug}
 git add specs/{idShort-padded}-{slug}.md
 git commit -m "spec: #{idShort} {title}"
 ```
+
+Do not proceed to step 6 until the branch exists and the spec is committed.
 
 **Step 6 — Implement.**
 Build exactly what the approved plan describes. Nothing more.
@@ -90,8 +94,9 @@ Always end the PR body with:
 Can be called at any point, with a reason.
 
 1. Ask for the reason if not provided.
-2. Move the card to Failed using the Trello MCP.
-3. Tell the user to go to the orchestrator and run `failure {reason}` to log the learning card.
+2. Add the reason as a comment on the card using the Trello MCP.
+3. Move the card to Failure using the Trello MCP.
+4. Tell the user to go to the orchestrator and run `failure {reason}` to log the learning card.
 
 ---
 
