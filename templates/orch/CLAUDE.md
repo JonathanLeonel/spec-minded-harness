@@ -22,7 +22,7 @@ Receive a Trello board URL (e.g. `setup-trello https://trello.com/b/abc123/my-bo
 2. Use the Trello MCP to find the board by that short ID and retrieve its full board ID.
 3. Write the full board ID into `config.yaml` under `trello.board_id`. Edit the file directly — no need to ask the user for confirmation.
 4. Call `get_lists` on the board. Compare the results against the 8 required column names defined in `config.yaml` under `trello.columns`: Backlog, Refined, Spec Ready, Coding, Local Review, PR, Done, Failure.
-5. For each missing column: call `add_list_to_board` to create it.
+5. Determine which columns are missing. Call `add_list_to_board` once per missing column, **in reverse order** (Failure → Done → PR → Local Review → Coding → Spec Ready → Refined → Backlog) — Trello prepends each new list, so creating them in reverse yields the correct left-to-right order.
 6. Report: which columns already existed and which were created.
 
 This command is idempotent — re-running it on an already-configured board creates no duplicate columns.
