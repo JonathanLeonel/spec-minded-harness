@@ -57,7 +57,7 @@ Run from the orch window. Two modes depending on whether a GitHub URL is provide
 2. Create the local directory at the `code_repo` path if it does not exist.
 3. If git is not already initialized inside it, run `git init`.
 4. Ensure `specs/done/` exists — create it if missing (with a `.gitkeep`).
-5. If no remote named `origin` exists, run `gh repo create {project-name} --public --source={code_repo_path} --remote=origin`.
+5. If no remote named `origin` exists, run `gh repo create {project-name} --private --source={code_repo_path} --remote=origin`.
 6. Run `git add .` and `git commit --allow-empty -m "chore: init"`, then `git push -u origin main`.
 7. Confirm with the GitHub URL of the created repo.
 
@@ -95,6 +95,7 @@ The draft must include: context (why this is being built and any relevant backgr
 Wait for the user to approve or request changes. Iterate until the user confirms.
 
 Only then write the file to `{code_repo}/specs/{idShort-padded}-{slug}.md` with this frontmatter:
+
 ```
 ---
 card_id: {full_trello_card_id}
@@ -108,12 +109,12 @@ Move the card to Spec Ready.
 Then output exactly this, nothing more:
 
 ---
+
 In your executor window, run:
 
 execute specs/{idShort-padded}-{slug}.md
 
-Come back here with `success` once the PR is merged.
----
+## Come back here with `success` once the PR is merged.
 
 ### `success`
 
