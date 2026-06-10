@@ -4,7 +4,7 @@ A spec-driven development runtime for Claude Code.
 
 ## The problem
 
-Coding agents are powerful but operationally chaotic. They drift, over-engineer, and lose context between sessions. The usual fix — better prompts — only goes so far.
+Coding agents are powerful but operationally chaotic. They drift, over-engineer, and lose context between sessions. The usual fix: better prompts. Only goes so far.
 
 The real fix is structure.
 
@@ -37,13 +37,13 @@ BACKLOG → REFINED → SPEC READY → CODING → LOCAL REVIEW → PR → DONE
 
 | State        | Owner                  |
 | ------------ | ---------------------- |
-| BACKLOG      | —                      |
+| BACKLOG      | Human                  |
 | REFINED      | Human + Orchestrator   |
 | SPEC READY   | Human                  |
 | CODING       | Executor agent         |
 | LOCAL REVIEW | Human (local testing)  |
 | PR           | Human / async reviewer |
-| DONE         | —                      |
+| DONE         | Human                  |
 | FAILURE      | Human (any stage)      |
 
 ## Actions
@@ -51,7 +51,7 @@ BACKLOG → REFINED → SPEC READY → CODING → LOCAL REVIEW → PR → DONE
 | Command                        | What happens                                          |
 | ------------------------------ | ----------------------------------------------------- |
 | `setup-trello <board-url>`     | Configure Trello board, create missing columns        |
-| `setup-orch-repo` *(optional)* | Publish the orch directory to a private GitHub repo   |
+| `setup-orch-repo` _(optional)_ | Publish the orch directory to a private GitHub repo   |
 | `setup-code-repo [github-url]` | Wire up the code repo — clone existing or create new  |
 | `add`                          | Create a card with just a title in BACKLOG            |
 | `refine`                       | Discuss and populate the first card (or a given ID)   |
@@ -70,7 +70,7 @@ BACKLOG → REFINED → SPEC READY → CODING → LOCAL REVIEW → PR → DONE
    ```
 3. Open `my-project/my-project-orch/` in Claude Code
 4. Run `setup-trello https://trello.com/b/xxxxx/my-board` — configures the board ID and creates any missing columns
-5. *(Optional)* Run `setup-orch-repo` to publish the orch directory to a private GitHub repo
+5. _(Optional)_ Run `setup-orch-repo` to publish the orch directory to a private GitHub repo
 6. Run `setup-code-repo` to create the code repo locally and on GitHub, or `setup-code-repo <url>` to wire up an existing repo
 7. Done — start with `add`
 
