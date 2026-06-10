@@ -102,6 +102,9 @@ Log each run: prompts, outputs, diffs, decisions. For debugging, retrospective a
 **Spec templates**  
 Predefined spec templates for common task types: bug fix, new feature, refactor, API endpoint. Reduces the time from `refine` to `spec`.
 
+**TDD-first execution mode**  
+When enabled, the executor writes failing tests first and pauses for human approval before coding. The implementation loop runs autonomously until all tests pass — no intermediate commits in red. The human only sees the green result.
+
 **`npx create-spec-minded`**  
 Publish as an npm package so bootstrapping a new project is a single command without needing to clone the repo manually.
 
