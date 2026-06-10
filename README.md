@@ -48,16 +48,18 @@ BACKLOG → REFINED → SPEC READY → CODING → LOCAL REVIEW → PR → DONE
 
 ## Actions
 
-| Command   | What happens                                          |
-| --------- | ----------------------------------------------------- |
-| `setup`   | Configure Trello board from URL — run once on init    |
-| `add`     | Create a card with just a title in BACKLOG            |
-| `refine`  | Discuss and populate the first card (or a given ID)   |
-| `spec`    | Write the formal spec to `{code-repo}/specs/`         |
-| `execute` | Prepare executor handoff — branch, spec path, context |
-| `push`    | Commit, push, open PR                                 |
-| `success` | Move card to DONE                                     |
-| `failure` | Move card to FAILED, keep branch, log a learning card |
+| Command                        | What happens                                          |
+| ------------------------------ | ----------------------------------------------------- |
+| `setup-trello <board-url>`     | Configure Trello board, create missing columns        |
+| `setup-orch-repo` *(optional)* | Publish the orch directory to a private GitHub repo   |
+| `setup-code-repo [github-url]` | Wire up the code repo — clone existing or create new  |
+| `add`                          | Create a card with just a title in BACKLOG            |
+| `refine`                       | Discuss and populate the first card (or a given ID)   |
+| `spec`                         | Write the formal spec to `{code-repo}/specs/`         |
+| `execute`                      | Prepare executor handoff — branch, spec path, context |
+| `push`                         | Commit, push, open PR                                 |
+| `success`                      | Move card to DONE                                     |
+| `failure`                      | Move card to FAILED, keep branch, log a learning card |
 
 ## Setup
 
@@ -67,8 +69,10 @@ BACKLOG → REFINED → SPEC READY → CODING → LOCAL REVIEW → PR → DONE
    spec-minded-harness/scripts/init.sh my-project
    ```
 3. Open `my-project/my-project-orch/` in Claude Code
-4. Run `setup https://trello.com/b/xxxxx/my-board` — the agent configures the board ID automatically
-5. Done — start with `add`
+4. Run `setup-trello https://trello.com/b/xxxxx/my-board` — configures the board ID and creates any missing columns
+5. *(Optional)* Run `setup-orch-repo` to publish the orch directory to a private GitHub repo
+6. Run `setup-code-repo` to create the code repo locally and on GitHub, or `setup-code-repo <url>` to wire up an existing repo
+7. Done — start with `add`
 
 ## Structure
 

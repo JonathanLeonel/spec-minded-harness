@@ -14,16 +14,56 @@ Read `config.yaml` at the start of every session to know the project name, code 
 
 When the user says an action name, execute it as described below.
 
-### `setup`
+### `setup-trello`
 
-Receive a Trello board URL (e.g. `setup https://trello.com/b/abc123/my-board`).
+Receive a Trello board URL (e.g. `setup-trello https://trello.com/b/abc123/my-board`).
 
 1. Extract the short ID from the URL — the segment between `/b/` and the board name.
 2. Use the Trello MCP to find the board by that short ID and retrieve its full board ID.
 3. Write the full board ID into `config.yaml` under `trello.board_id`. Edit the file directly — no need to ask the user for confirmation.
-4. Confirm: show the board name and ID that were saved.
+4. Call `get_lists` on the board. Compare the results against the 8 required column names defined in `config.yaml` under `trello.columns`: Backlog, Refined, Spec Ready, Coding, Local Review, PR, Done, Failure.
+5. For each missing column: call `add_list_to_board` to create it.
+6. Report: which columns already existed and which were created.
 
-Only run this once during initial project setup.
+This command is idempotent — re-running it on an already-configured board creates no duplicate columns.
+
+### `setup-orch-repo`
+
+Run from the orch window. Publishes the orch directory to GitHub as a private repo. This step is optional — orch repos are often kept local.
+
+1. Check if git is already initialized in the current directory. If not, run `git init`.
+2. Check if a remote named `origin` already exists. If not, run `gh repo create {project-name}-orch --private --source=. --remote=origin`.
+3. If there are uncommitted changes, run `git add .` and `git commit -m "chore: init orch"`. Skip if the working tree is clean.
+4. Run `git push -u origin main` (skip if already up to date).
+5. Confirm with the GitHub URL of the repo.
+
+This command is idempotent — re-running it on an already-pushed repo produces no errors.
+
+### `setup-code-repo`
+
+Run from the orch window. Two modes depending on whether a GitHub URL is provided.
+
+**Mode A — existing repo** (`setup-code-repo https://github.com/user/repo`):
+
+1. Parse the repo name from the URL.
+2. Read `paths.code_repo` from `config.yaml` to get the target local path.
+3. If the directory does not already exist: clone the repo to that path.
+4. Ensure `specs/done/` exists inside the repo — create it if missing (with a `.gitkeep`).
+5. Confirm the local path and remote URL.
+
+**Mode B — new repo** (`setup-code-repo`, no args):
+
+1. Read `paths.code_repo` and `project.name` from `config.yaml`.
+2. Create the local directory at the `code_repo` path if it does not exist.
+3. If git is not already initialized inside it, run `git init`.
+4. Ensure `specs/done/` exists — create it if missing (with a `.gitkeep`).
+5. If no remote named `origin` exists, run `gh repo create {project-name} --public --source={code_repo_path} --remote=origin`.
+6. Run `git add .` and `git commit --allow-empty -m "chore: init"`, then `git push -u origin main`.
+7. Confirm with the GitHub URL of the created repo.
+
+This command is idempotent — re-running it on an already-configured repo produces no errors.
+
+**Prerequisite:** `setup-trello` must be run first so `config.yaml` has a valid `board_id`.
 
 ### `add`
 
