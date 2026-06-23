@@ -1,0 +1,22 @@
+{
+  "name": "@jonathanleonel/smh",
+  "version": "0.1.0",
+  "description": "Spec-minded development runtime for Claude Code",
+  "type": "module",
+  "bin": {
+    "smh": "bin/smh.mjs"
+  },
+  "files": [
+    "bin/",
+    "templates/",
+    "config.template.yaml"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JonathanLeonel/spec-minded-harness.git"
+  },
+  "license": "MIT"
+}
